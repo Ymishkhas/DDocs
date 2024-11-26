@@ -3,11 +3,12 @@ services:
   
   db:
     image: postgres:16.4-alpine
-    container_name: postgres_container
-    hostname: postgres16
+    container_name: ddocs_postgres_container
+    hostname: ${POSTGRES_HOST}
     env_file:
       - .env
     environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
@@ -30,9 +31,9 @@ services:
     image: dpage/pgadmin4:8.11.0
     env_file:
       - .env
-    container_name: pgadmin_container
+    container_name: ddocs_pgadmin_container
     environment:
-      - POSTGRES_HOST=postgres16
+      - POSTGRES_HOST=${POSTGRES_HOST}
       - POSTGRES_PORT=${POSTGRES_PORT}
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
@@ -55,20 +56,15 @@ services:
       - app_network
 
   api_server:
-    environment:
-      - API_SERVER_PORT=${API_SERVER_PORT}
-      - POSTGRES_HOST=postgres16
-      - POSTGRES_PORT=${POSTGRES_PORT}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     build:
       context: api_server
       dockerfile: Dockerfile
       args:
         PORT: ${API_SERVER_PORT}
+    env_file:
+      - .env
     image: api_server_image
-    container_name: api_server_container
+    container_name: ddocs_api_server_container
     ports:
       - ${API_SERVER_PORT}:${API_SERVER_PORT}
     volumes:
@@ -93,7 +89,7 @@ services:
       args:
         PORT: ${REACT_APP_PORT}
     image: react_app_image
-    container_name: react_container
+    container_name: ddocs_react_container
     ports:
       - ${REACT_APP_PORT}:${REACT_APP_PORT}
     volumes:
