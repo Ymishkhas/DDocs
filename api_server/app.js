@@ -4,7 +4,7 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerConfigs from './configs/swaggerConfig.js'
 import apiRoutes from './routes/index.js'
 import { postgresDB } from './configs/postgresDB.js'
-import validateApiKey from './middlewares/validateApiKey.js'
+import validateTokens from './middlewares/validateTokens.js'
 import errorHandling from './middlewares/errorHandling.js'
 
 const app = express()
@@ -16,7 +16,7 @@ const port = process.env.API_SERVER_PORT || 4000
 
 const router = express.Router()
 apiRoutes(router)
-app.use("/api", validateApiKey, router)
+app.use("/api", validateTokens, router)
 
 // API docs
 const swaggerUiOptions = {
