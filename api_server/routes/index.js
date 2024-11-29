@@ -1,5 +1,6 @@
 import UserRoutes from './UserRoutes.js';
-
+import FolderRoutes from './FolderRoutes.js';
+import FileRoutes from './FileRoutes.js';
 
 /**
  * @swagger
@@ -34,7 +35,9 @@ const apiRoutes = (router) => {
         res.status(200).json({ status: 'Healthy' });
     });
     router.use('/users', UserRoutes)
-
+    router.use('/folders', FolderRoutes)
+    router.use('/files', FileRoutes)
+    
     // Middleware to catch 404 errors
     router.use((req, res, next) => {
         console.log(`404 Not Found: ${req.url}`);

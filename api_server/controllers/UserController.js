@@ -28,8 +28,8 @@ const UserController = {
      */
     async createUser(req, res) {
         try {
-            const { user_id, username, first_name, last_name, email } = req.body;
-            const newUser = await User.create({ user_id, username, first_name, last_name, email });
+            const { user_id, username, fullname, email } = req.body;
+            const newUser = await User.create({ user_id, username, fullname, email });
             res.status(201).json(newUser);
         } catch (error) {
             res.status(400).json({ message: "Error creating user", error: error.message });
@@ -94,7 +94,6 @@ const UserController = {
      */
     async getUserById(req, res) {
         try {
-            console.log('Received user_id:', req.params.user_id.id); // Debugging line
             const user = await User.findByPk(req.params.user_id);
             if (user) {
                 res.status(200).json(user);
@@ -142,6 +141,13 @@ const UserController = {
      */
     async updateUser(req, res) {
         try {
+            // Check if the authenticated user is the same to whom he wants to update
+            if (!req.user) {
+                return res.status(401).json({ message: "User not authenticated" });
+            }
+            if (req.user.user_id !== req.params.user_id) {
+                return res.status(403).json({ message: "You are not authorized to update this user" });
+            }
             const [updated] = await User.update(req.body, {
                 where: { user_id: req.params.user_id }
             });
@@ -180,6 +186,13 @@ const UserController = {
      */
     async deleteUser(req, res) {
         try {
+            // Check if the authenticated user is the same to whom he wants to update
+            if (!req.user) {
+                return res.status(401).json({ message: "User not authenticated" });
+            }
+            if (req.user.user_id !== req.params.user_id) {
+                return res.status(403).json({ message: "You are not authorized to update this user" });
+            }
             const deleted = await User.destroy({
                 where: { user_id: req.params.user_id }
             });
