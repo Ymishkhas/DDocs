@@ -2,8 +2,7 @@
 CREATE TABLE "Users" (
     "user_id" varchar(255) PRIMARY KEY,
     "username" varchar UNIQUE NOT NULL,
-    "first_name" varchar(120) NOT NULL,
-    "last_name" varchar(120) NOT NULL,
+    "fullname" varchar(255) NOT NULL,
     "email" varchar,
     "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP

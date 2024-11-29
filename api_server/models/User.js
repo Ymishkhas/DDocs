@@ -14,12 +14,9 @@ import { DataTypes } from "sequelize";
  *         username:
  *           type: string
  *           description: The username of the user
- *         first_name:
+ *         fullname:
  *           type: string
- *           description: The first name of the user
- *         last_name:
- *           type: string
- *           description: The last name of the user
+ *           description: The full name of the user
  *         email:
  *           type: string
  *           description: The email address of the user
@@ -34,13 +31,11 @@ import { DataTypes } from "sequelize";
  *       required:
  *         - user_id
  *         - username
- *         - first_name
- *         - last_name
+ *         - fullname
  *       example:
  *         user_id: "dfsfsfy653hg"
  *         username: "mali"
- *         first_name: "Mohamed"
- *         last_name: "Ali"
+ *         fullname: "Mohamed Ali"
  *         email: "mali@example.com"
  *         createdAt: "2023-01-01T10:00:00Z"
  *         updatedAt: "2023-01-01T10:00:00Z"
@@ -55,11 +50,7 @@ const User = sequelize.define('User', {
         unique: true,
         allowNull: false
     },
-    first_name: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    last_name: {
+    fullname: {
         type: DataTypes.STRING,
         allowNull: false
     },

@@ -1,9 +1,9 @@
 -- Populate the database with data
 
 -- Insert into Users Table
-INSERT INTO public."Users" (user_id, username, first_name, last_name, email) VALUES ('dfsfsfy653hg', 'mali', 'Mohamed', 'Ali', 'mali@example.com');
-INSERT INTO public."Users" (user_id, username, first_name, last_name, email) VALUES ('jfhget65bvj', 'fhassan', 'Fatima', 'Hassan', 'fhassan@example.com');
-INSERT INTO public."Users" (user_id, username, first_name, last_name, email) VALUES ('jf753gfdvwk', 'amahmoud', 'Ahmed', 'Mahmoud', 'amahmoud@example.com');
+INSERT INTO public."Users" (user_id, username, fullname, email) VALUES ('dfsfsfy653hg', 'mali', 'Mohamed Ali', 'mali@example.com');
+INSERT INTO public."Users" (user_id, username, fullname, email) VALUES ('jfhget65bvj', 'fhassan', 'Fatima Hassan', 'fhassan@example.com');
+INSERT INTO public."Users" (user_id, username, fullname, email) VALUES ('jf753gfdvwk', 'amahmoud', 'Ahmed Mahmoud', 'amahmoud@example.com');
 
 -- Insert into Folders Table
 INSERT INTO public."Folders" (folder_id, parent_id, user_id, name) VALUES (1, NULL, 'dfsfsfy653hg', 'Main');

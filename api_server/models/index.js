@@ -20,8 +20,16 @@ File.belongsTo(Folder, {
     foreignKey: 'folder_id'
 });
 
-Folder.hasMany(Folder, {foreignKey: 'parent_id', onDelete: 'CASCADE'});
-Folder.belongsTo(Folder, {foreignKey: 'parent_id'});
+// Define the alias for the subfolders relationship
+Folder.hasMany(Folder, {
+    foreignKey: 'parent_id',
+    as: 'subfolders',
+    onDelete: 'CASCADE'
+});
+Folder.belongsTo(Folder, {
+    foreignKey: 'parent_id',
+    as: 'parentFolder'
+});
 
 export {
     User,

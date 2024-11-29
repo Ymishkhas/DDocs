@@ -22,8 +22,10 @@ const validateTokens = async (req, res, next) => {
 
     // [OPTIONAL] Validate Firebase token
     try {
-        const decodedToken = await admin.auth().verifyIdToken(firebaseToken);
-        req.user = decodedToken;
+        if (firebaseToken) {
+            const decodedToken = await admin.auth().verifyIdToken(firebaseToken);
+            req.user = decodedToken;
+        }
     } catch (error) {
         // Ignore the error and proceed without authentication of firebase token
         // return res.status(403).json({ error: 'Invalid or expired token' });
