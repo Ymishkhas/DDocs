@@ -21,9 +21,9 @@ const FileController = {
      *               folder_id:
      *                 type: integer
      *                 description: The ID of the folder where the file will be created
-     *               title:
+     *               name:
      *                 type: string
-     *                 description: The title of the file
+     *                 description: The name of the file
      *               content:
      *                 type: string
      *                 description: The content of the file
@@ -48,7 +48,7 @@ const FileController = {
             }
 
             const user_id = req.user.user_id // 'dfsfsfy653hg'; // user_id: req.user.user_id,
-            const { folder_id, title, content } = req.body;
+            const { folder_id, name, content } = req.body;
 
             // Check if the folder exists and belongs to the user
             const folder = await Folder.findOne({
@@ -61,7 +61,7 @@ const FileController = {
                 return res.status(404).json({ message: "Folder not found or you do not have access to this folder" });
             }
 
-            const newFile = await File.create({ folder_id, title, content });
+            const newFile = await File.create({ folder_id, name, content });
             res.status(201).json(newFile);
         } catch (error) {
             res.status(400).json({ message: "Error creating file", error: error.message });
@@ -148,9 +148,9 @@ const FileController = {
      *           schema:
      *             type: object
      *             properties:
-     *               title:
+     *               name:
      *                 type: string
-     *                 description: The title of the file
+     *                 description: The name of the file
      *               content:
      *                 type: string
      *                 description: The content of the file

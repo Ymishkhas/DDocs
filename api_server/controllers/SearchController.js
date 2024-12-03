@@ -40,7 +40,7 @@ const SearchController = {
             }
             const documents = await File.findAll({
                 where: {
-                    ...(q && { title: { [Op.iLike]: `%${q}%` } }),
+                    ...(q && { name: { [Op.iLike]: `%${q}%` } }),
                     is_public: true
                 },
                 // attributes: { exclude: ["blob_url"] },

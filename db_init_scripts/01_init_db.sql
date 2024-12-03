@@ -24,7 +24,7 @@ CREATE TABLE "Folders" (
 CREATE TABLE "Files" (
     "file_id" serial PRIMARY KEY,
     "folder_id" int,
-    "title" varchar(255) NOT NULL,
+    "name" varchar(255) NOT NULL,
     "description" text,
     "content" text,
     "is_public" boolean DEFAULT FALSE,

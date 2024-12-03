@@ -14,9 +14,9 @@ import { DataTypes } from "sequelize";
  *         folder_id:
  *           type: integer
  *           description: The ID of the folder containing the file
- *         title:
+ *         name:
  *           type: string
- *           description: The title of the file
+ *           description: The name of the file
  *         description:
  *           type: string
  *           description: The description of the file
@@ -36,11 +36,11 @@ import { DataTypes } from "sequelize";
  *           description: The date and time when the file was last updated
  *       required:
  *         - folder_id
- *         - title
+ *         - name
  *       example:
  *         file_id: 1
  *         folder_id: 1
- *         title: "File 1"
+ *         name: "File 1"
  *         description: "Description of File 1"
  *         content: "Content of File 1"
  *         is_public: false
@@ -57,7 +57,7 @@ const File = sequelize.define('File', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    title: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },

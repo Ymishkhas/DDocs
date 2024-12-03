@@ -15,7 +15,7 @@ async function fetchFolderHierarchy(folder_id, user_id) {
             include: [
                 {
                     model: File,
-                    attributes: ['file_id', 'title', 'description', 'is_public']
+                    attributes: ['file_id', 'name', 'description', 'is_public']
                 }
             ]
         });
@@ -30,7 +30,7 @@ async function fetchFolderHierarchy(folder_id, user_id) {
             include: [
                 {
                     model: File,
-                    attributes: ['file_id', 'title', 'description', 'is_public']
+                    attributes: ['file_id', 'name', 'description', 'is_public']
                 }
             ]
         });
@@ -169,9 +169,9 @@ const FolderController = {
      *                           file_id:
      *                             type: integer
      *                             description: The ID of the file
-     *                           title:
+     *                           name:
      *                             type: string
-     *                             description: The title of the file
+     *                             description: The name of the file
      *                           description:
      *                             type: string
      *                             description: The description of the file
@@ -263,9 +263,9 @@ const FolderController = {
      *                           file_id:
      *                             type: integer
      *                             description: The ID of the file
-     *                           title:
+     *                           name:
      *                             type: string
-     *                             description: The title of the file
+     *                             description: The name of the file
      *                           description:
      *                             type: string
      *                             description: The description of the file
@@ -301,7 +301,7 @@ const FolderController = {
                     },
                     {
                         model: File,
-                        attributes: ['file_id', 'title', 'description', 'is_public']
+                        attributes: ['file_id', 'name', 'description', 'is_public']
                     }
                 ]
             });
@@ -391,9 +391,9 @@ const FolderController = {
     *                           file_id:
     *                             type: integer
     *                             description: The ID of the file
-    *                           title:
+    *                           name:
     *                             type: string
-    *                             description: The title of the file
+    *                             description: The name of the file
     *                           description:
     *                             type: string
     *                             description: The description of the file

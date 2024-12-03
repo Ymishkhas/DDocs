@@ -45,7 +45,7 @@ const UserController = {
             });
 
             await File.create({
-                title: 'Creating folders and files',
+                name: 'Creating folders and files',
                 description: 'This is how to create folders and files in the app',
                 is_public: false,
                 folder_id: subFolder.folder_id,

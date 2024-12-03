@@ -163,7 +163,7 @@ const Folder = ({ padding, handleCreateNode, handleDeleteNode, handleUpdateNode,
                             onKeyDown={updateNodeName}
                         />
                     ) : (
-                        <label>{node.title}</label>
+                        <label>{node.name}</label>
                     )}
                 </span>
                 <div className="buttons-container">

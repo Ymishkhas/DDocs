@@ -56,7 +56,7 @@ const FileExplorer = () => {
             // create file
             try {
                 const token = await getUserToken();
-                await createFile({ folder_id: parentFolderId, title: nodeName }, token);
+                await createFile({ folder_id: parentFolderId, name: nodeName }, token);
                 fetchRootFolder();
             } catch (error) {
                 console.error('Error creating file:', error.message);
@@ -100,7 +100,7 @@ const FileExplorer = () => {
             // update file
             try {
                 const token = await getUserToken();
-                await updateFile(nodeId, { title: nodeName }, token);
+                await updateFile(nodeId, { name: nodeName }, token);
                 fetchRootFolder();
             } catch (error) {
                 console.error('Error updating file:', error.message);
