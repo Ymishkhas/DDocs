@@ -1,5 +1,76 @@
 import { Folder, File } from '../models/index.js';
 
+async function fetchFolderHierarchy(folder_id, user_id) {
+
+    let folder;
+
+    if (folder_id === null) {
+        // Fetch the root folder
+        folder = await Folder.findOne({
+            where: {
+                user_id: user_id,
+                parent_id: null
+            },
+            attributes: ['folder_id', 'name', 'parent_id'],
+            include: [
+                {
+                    model: File,
+                    attributes: ['file_id', 'title', 'description', 'is_public']
+                }
+            ]
+        });
+    } else {
+        // Fetch a subfolder
+        folder = await Folder.findOne({
+            where: {
+                folder_id: folder_id,
+                user_id: user_id
+            },
+            attributes: ['folder_id', 'name', 'parent_id'],
+            include: [
+                {
+                    model: File,
+                    attributes: ['file_id', 'title', 'description', 'is_public']
+                }
+            ]
+        });
+    }
+
+    if (!folder) {
+        return null;
+    }
+
+    const subfolders = await Folder.findAll({
+        where: {
+            parent_id: folder.folder_id,
+            user_id: user_id
+        },
+        attributes: ['folder_id', 'name', 'parent_id']
+    });
+
+    const subfolderPromises = subfolders.map(async (subfolder) => {
+        const subfolderHierarchy = await fetchFolderHierarchy(subfolder.folder_id, user_id);
+        return {
+            ...subfolderHierarchy,
+            isFolder: true
+        };
+    });
+
+    const subfolderResults = await Promise.all(subfolderPromises);
+
+    return {
+        folder_id: folder.folder_id,
+        name: folder.name,
+        parent_id: folder.parent_id,
+        subfolders: subfolderResults,
+        files: folder.Files.map(file => ({
+            ...file.toJSON(),
+            isFolder: false
+        })),
+        isFolder: true
+    };
+}
+
 const FolderController = {
 
     /**
@@ -38,11 +109,11 @@ const FolderController = {
      */
     async createFolder(req, res) {
         try {
-            // if (!req.user) {
-            //     return res.status(401).json({ message: "User not authenticated" });
-            // }
+            if (!req.user) {
+                return res.status(401).json({ message: "User not authenticated" });
+            }
 
-            const user_id = 'dfsfsfy653hg'; // user_id: req.user.user_id,
+            const user_id = req.user.user_id // 'dfsfsfy653hg'; // user_id: req.user.user_id,
 
             // The user authenticated, and its his parent folder so create the new folder
             const { parent_id, name } = req.body;
@@ -117,38 +188,24 @@ const FolderController = {
      */
     async getRootFolder(req, res) {
         try {
-            // if (!req.user) {
-            //     return res.status(401).json({ message: "User not authenticated" });
-            // }
-            const rootFolder = await Folder.findOne({
-                where: {
-                    user_id: 'dfsfsfy653hg', // user_id: req.user.user_id,
-                    parent_id: null
-                },
-                attributes: ['folder_id', 'name'],
-                include: [
-                    {
-                        model: Folder,
-                        as: 'subfolders',
-                        attributes: ['folder_id', 'parent_id', 'name'],
-                    },
-                    {
-                        model: File,
-                        attributes: ['file_id', 'title', 'description', 'is_public']
-                    }
-                ]
-            });
-
-            // Return strcutured data
-            const structure = {
-                [rootFolder.folder_id]: {
-                    name: rootFolder.name,
-                    subfolders: rootFolder.subfolders,
-                    files: rootFolder.Files,
-                    isLoaded: true
-                }
+            if (!req.user) {
+                return res.status(401).json({ message: "User not authenticated" });
             }
-            res.status(200).json(structure);
+            // req.user.user_id)
+            // const rootFolder = await Folder.findOne({
+            //     where: {
+            //         user_id: 'dfsfsfy653hg', // user_id: req.user.user_id,
+            //         parent_id: null
+            //     },
+            // })
+
+            const rootFolder = await fetchFolderHierarchy(null, req.user.user_id);
+
+            if (!rootFolder) {
+                return res.status(404).json({ message: "Root folder not found" });
+            }
+
+            res.status(200).json(rootFolder);
         } catch (error) {
             res.status(500).json({ message: "Error fetching root folder", error: error.message });
         }
@@ -227,12 +284,12 @@ const FolderController = {
      */
     async getFolderById(req, res) {
         try {
-            // if (!req.user) {
-            //     return res.status(401).json({ message: "User not authenticated" });
-            // }
+            if (!req.user) {
+                return res.status(401).json({ message: "User not authenticated" });
+            }
             const folder = await Folder.findOne({
                 where: {
-                    user_id: 'dfsfsfy653hg', // user_id: req.user.user_id,
+                    user_id: req.user.user_id , // 'dfsfsfy653hg', // user_id: req.user.user_id,
                     folder_id: req.params.folder_id
                 },
                 attributes: ['folder_id', 'name'],
@@ -251,11 +308,12 @@ const FolderController = {
 
             if (!folder) {
                 return res.status(404).json({ message: "Folder not found" });
-            }    
+            }
 
             // Return strcutured data
             const structure = {
                 [folder.folder_id]: {
+                    folder_id: folder.folder_id,
                     name: folder.name,
                     subfolders: folder.subfolders,
                     files: folder.Files,
@@ -354,42 +412,17 @@ const FolderController = {
     */
     async updateFolder(req, res) {
         try {
-            // if (!req.user) {
-            //     return res.status(401).json({ message: "User not authenticated" });
-            // }
+            if (!req.user) {
+                return res.status(401).json({ message: "User not authenticated" });
+            }
             const [updated] = await Folder.update(req.body, {
-                where: { user_id: 'dfsfsfy653hg' /*req.user.user_id*/, folder_id: req.params.folder_id }
+                where: { user_id: req.user.user_id, folder_id: req.params.folder_id }
             });
             if (updated) {
                 const folder = await Folder.findOne({
-                    where: {
-                        user_id: 'dfsfsfy653hg' /*req.user.user_id*/,
-                        folder_id: req.params.folder_id
-                    },
-                    attributes: ['folder_id', 'name'],
-                    include: [
-                        {
-                            model: Folder,
-                            as: 'subfolders',
-                            attributes: ['folder_id', 'parent_id', 'name'],
-                        },
-                        {
-                            model: File,
-                            attributes: ['file_id', 'title', 'description', 'is_public']
-                        }
-                    ]
+                    where: { user_id: req.user.user_id, folder_id: req.params.folder_id }
                 });
-
-                // Return structured data
-                const structure = {
-                    [folder.folder_id]: {
-                        name: folder.name,
-                        subfolders: folder.subfolders,
-                        files: folder.Files,
-                        isLoaded: true
-                    }
-                };
-                res.status(200).json(structure);
+                res.status(200).json(folder);
             } else {
                 res.status(404).json({ message: "Folder not found" });
             }
@@ -427,11 +460,11 @@ const FolderController = {
     async deleteFolder(req, res) {
         try {
             // Check if the authenticated user is the same to whom he wants to update
-            // if (!req.user) {
-            //     return res.status(401).json({ message: "User not authenticated" });
-            // }
+            if (!req.user) {
+                return res.status(401).json({ message: "User not authenticated" });
+            }
             const deleted = await Folder.destroy({
-                where: { user_id: 'dfsfsfy653hg' /*req.user.user_id*/, folder_id: req.params.folder_id }
+                where: { user_id: req.user.user_id /*dfsfsfy653hg*/, folder_id: req.params.folder_id }
             });
             if (deleted) {
                 res.status(204).send("Folder deleted");

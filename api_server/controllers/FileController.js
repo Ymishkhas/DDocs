@@ -43,11 +43,11 @@ const FileController = {
      */
     async createFile(req, res) {
         try {
-            // if (!req.user) {
-            //     return res.status(401).json({ message: "User not authenticated" });
-            // }
+            if (!req.user) {
+                return res.status(401).json({ message: "User not authenticated" });
+            }
 
-            const user_id = 'dfsfsfy653hg'; // user_id: req.user.user_id,
+            const user_id = req.user.user_id // 'dfsfsfy653hg'; // user_id: req.user.user_id,
             const { folder_id, title, content } = req.body;
 
             // Check if the folder exists and belongs to the user
@@ -100,16 +100,16 @@ const FileController = {
      */
     async getFileById(req, res) {
         try {
-            // if (!req.user) {
-            //     return res.status(401).json({ message: "User not authenticated" });
-            // }
+            if (!req.user) {
+                return res.status(401).json({ message: "User not authenticated" });
+            }
             
             const file = await File.findOne({
                 where: { file_id: req.params.file_id },
                 include: [
                     {
                         model: Folder,
-                        where: { user_id: 'dfsfsfy653hg' /*req.user.user_id*/ },
+                        where: { user_id: req.user.user_id /*dfsfsfy653hg*/ },
                         attributes: [] // We don't need any attributes from the Folder model
                     }
                 ]
@@ -175,15 +175,15 @@ const FileController = {
      */
     async updateFile(req, res) {
         try {
-            // if (!req.user) {
-            //     return res.status(401).json({ message: "User not authenticated" });
-            // }
+            if (!req.user) {
+                return res.status(401).json({ message: "User not authenticated" });
+            }
             const [updated] = await File.update(req.body, {
                 where: { file_id: req.params.file_id },
                 include: [
                     {
                         model: Folder,
-                        where: { user_id: 'dfsfsfy653hg' /*req.user.user_id*/ },
+                        where: { user_id: req.user.user_id /*dfsfsfy653hg*/ },
                         attributes: [] // We don't need any attributes from the Folder model
                     }
                 ]
@@ -231,15 +231,15 @@ const FileController = {
     async deleteFile(req, res) {
         try {
             // Check if the authenticated user is the same to whom he wants to update
-            // if (!req.user) {
-            //     return res.status(401).json({ message: "User not authenticated" });
-            // }
+            if (!req.user) {
+                return res.status(401).json({ message: "User not authenticated" });
+            }
             const deleted = await File.destroy({
                 where: { file_id: req.params.file_id },
                 include: [
                     {
                         model: Folder,
-                        where: { user_id: 'dfsfsfy653hg' /*req.user.user_id*/ },
+                        where: { user_id: req.user.user_id  /*dfsfsfy653hg*/ },
                         attributes: [] // We don't need any attributes from the Folder model
                     }
                 ]

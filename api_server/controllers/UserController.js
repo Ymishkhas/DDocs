@@ -1,4 +1,4 @@
-import { User } from '../models/index.js';
+import { User, Folder, File } from '../models/index.js';
 
 const UserController = {
     /**
@@ -30,6 +30,28 @@ const UserController = {
         try {
             const { user_id, username, fullname, email } = req.body;
             const newUser = await User.create({ user_id, username, fullname, email });
+
+            // Create default folder structure
+            const rootFolder = await Folder.create({
+                name: 'My Documents',
+                user_id: newUser.user_id,
+                parent_id: null
+            });
+
+            const subFolder = await Folder.create({
+                name: 'Getting Started',
+                user_id: newUser.user_id,
+                parent_id: rootFolder.folder_id
+            });
+
+            await File.create({
+                title: 'Creating folders and files',
+                description: 'This is how to create folders and files in the app',
+                is_public: false,
+                folder_id: subFolder.folder_id,
+                user_id: newUser.user_id
+            });
+
             res.status(201).json(newUser);
         } catch (error) {
             res.status(400).json({ message: "Error creating user", error: error.message });
