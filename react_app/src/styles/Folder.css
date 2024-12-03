@@ -1,0 +1,91 @@
+#folder-container {
+    margin-left: 20px;
+}
+
+.folder-container {
+    /* padding-left: 20px; */
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+}
+
+.node:hover {
+    background-color: #ecebec;
+    border-radius: 5px;
+    /* color: #333333 */
+}
+
+.node:hover .buttons-container {
+    visibility: visible;
+
+}
+
+.node>div>button {
+    font-size: 16px;
+}
+
+.node {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 5px;
+    width: 300px;
+    position: relative;
+    color: #777777;
+}
+
+.node>span {
+    /* color: #777777; */
+
+}
+
+button {
+    background-color: transparent;
+    /* color: #777777; */
+    border: 0;
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+.node>span>label {
+    display: inline-block;
+    margin: 3px 3px;
+    position: absolute;
+    top: 2px;
+}
+
+.add-node {
+    background-color: #eeeeee;
+    align-items: center;
+    padding: 5px 3px;
+    width: 300px;
+    position: relative;
+}
+
+.add-node>span {
+    color: #777777;
+    padding-right: 3px;
+}
+
+.buttons-container {
+    display: flex;
+    visibility: hidden;
+
+}
+
+.node>span>input {
+    width: 75%;
+    margin-left: 3px;
+}
+
+.file-explorer-icon {
+    width: 1rem;  
+    height: 1rem;
+    /* color: #777777; */
+}
+
+.arrow-icon {
+    width: 0.9rem;  
+    height: 0.9rem;
+}

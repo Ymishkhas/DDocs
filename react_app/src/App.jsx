@@ -1,23 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import Home from './components/Home';
+import Header from './components/Header';
+import FileExplorer from './components/FileExplorer';
+import Document from './components/Content';
+import './App.css';
 
 function App() {
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>React App</h1>
-    </>
-  )
+    <BrowserRouter>
+      <AuthProvider>
+        <Header />
+        <div id='main'>
+          <ProtectedRoute>
+            <FileExplorer />
+          </ProtectedRoute>
+          <div id='content'>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/:file_id" element={<Document />} />
+            </Routes>
+          </div>
+        </div>
+      </AuthProvider>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

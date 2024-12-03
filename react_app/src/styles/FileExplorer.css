@@ -1,0 +1,23 @@
+#file-explorer {
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0px;
+    background-color: #f5f4f6;
+    border-right: 1px solid #e8e8e8;
+}
+
+.explorer-component {
+    padding: 20px;
+    border-bottom: 1px solid #e8e8e8;
+    margin-bottom: 10px;
+}
+
+#search-input {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 1px solid #c2c2c2;
+    border-radius: 5px;
+}
