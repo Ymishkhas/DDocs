@@ -10,15 +10,46 @@ body {
 
 #main {
   display: grid;
-  grid-template-columns: 300px 1fr;
   grid-gap: 1rem;
   border-top: 1px solid #e8e8e8;
   height: 95vh;
 }
 
+#main.single-item {
+  grid-template-columns: 1fr;
+}
+
+#main.two-items {
+  grid-template-columns: 300px 1fr;
+}
+
+/* #main {
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  grid-gap: 1rem;
+  border-top: 1px solid #e8e8e8;
+  height: 95vh;
+} */
+
 #content {
   padding: 20px;
 }
+
+/* #main {
+  display: flex;
+  height: 100%;
+}
+
+#protected-route {
+  width: 300px;
+}
+
+#content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  height: 100%;
+} */
 
 * {
   --white: #FFF;
