@@ -1,7 +1,7 @@
 import { CogIcon, ArrowRightStartOnRectangleIcon } from '@heroicons/react/16/solid';
-import { Link } from 'react-router-dom';
+import { Link , } from 'react-router-dom';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { registerUser } from '../services/api.js';
 import SelectButton from './SelectButton';
@@ -11,10 +11,12 @@ const Header = () => {
 
     const { login, logout, user } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
 
     async function handleLogin() {
         try {
             const result = await login();
+            navigate(location.pathname);
             const user_data = result.user;
             const createdAt = user_data.metadata.createdAt;
             const current = new Date();
@@ -38,7 +40,7 @@ const Header = () => {
     async function handleLogout() {
         try {
             await logout();
-            // navigate('/');
+            navigate(location.pathname);
         } catch {
             console.error('Failed to logout');
         }

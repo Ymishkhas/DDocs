@@ -23,6 +23,13 @@ const Tiptap = ({ file_content, editable, updateFileContent }) => {
         },
     });
 
+    // Update editor editable state when editable prop changes
+    useEffect(() => {
+        if (editor) {
+            editor.setEditable(editable);
+        }
+    }, [editable, editor]);
+
     // Update editor content when file_content changes
     useEffect(() => {
         if (editor && file_content !== editor.getHTML()) {

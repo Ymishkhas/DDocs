@@ -100,23 +100,32 @@ const FileController = {
      */
     async getFileById(req, res) {
         try {
-            if (!req.user) {
-                return res.status(401).json({ message: "User not authenticated" });
-            }
-            
+
+            // Get the file 
             const file = await File.findOne({
                 where: { file_id: req.params.file_id },
                 include: [
                     {
                         model: Folder,
-                        where: { user_id: req.user.user_id /*dfsfsfy653hg*/ },
                         attributes: ['user_id'] // We don't need any attributes from the Folder model
                     }
                 ]
             });
-    
+
             if (!file) {
-                return res.status(404).json({ message: "File not found or you do not have access to this file" });
+                return res.status(404).json({ message: "File not found" });
+            }
+
+            if(file.is_public) {
+                return res.status(200).json(file);
+            }
+
+            // if the file is private lets check if the user is the owner and he is loged in
+            if (!req.user) {
+                return res.status(401).json({ message: "User not authenticated" });
+            }
+            if (file.Folder.user_id !== req.user.user_id) {
+                return res.status(403).json({ message: "You do not have access to this file" });
             }
             
             res.status(200).json(file);

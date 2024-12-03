@@ -12,3 +12,35 @@
 .content-container {
     height: 100%;
 }
+
+#public-button {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e8e8e8;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#public-button .status-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+#public-button.green .status-circle {
+    background-color: green;
+}
+
+#public-button.red .status-circle {
+    background-color: red;
+}
+
+#public-button .status-text {
+    color: #333333;
+}
