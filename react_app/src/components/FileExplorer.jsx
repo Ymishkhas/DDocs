@@ -1,14 +1,12 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
 import { useAuth } from '../contexts/AuthContext';
-import { getRootFolder, updateFolder, updateFile, createFolder, createFile, deleteFolder, deleteFile  } from '../services/api.js';
-import { useNavigate } from 'react-router-dom';
+import { getRootFolder, updateFolder, updateFile, createFolder, createFile, deleteFolder, deleteFile, getFile  } from '../services/api.js';
 import { useEffect, useState } from 'react';
 import Folder from './Folder';
 import '../styles/FileExplorer.css';
 
 const FileExplorer = () => {
-    const { user, logout } = useAuth();
-    // const navigate = useNavigate();
+    const { user } = useAuth();
 
     const [searchInput, setSearchInput] = useState('');
     const [explorer, setExplorer] = useState(null);

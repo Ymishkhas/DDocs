@@ -110,7 +110,7 @@ const FileController = {
                     {
                         model: Folder,
                         where: { user_id: req.user.user_id /*dfsfsfy653hg*/ },
-                        attributes: [] // We don't need any attributes from the Folder model
+                        attributes: ['user_id'] // We don't need any attributes from the Folder model
                     }
                 ]
             });

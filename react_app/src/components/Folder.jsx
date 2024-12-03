@@ -1,6 +1,7 @@
 import { ChevronDownIcon, ChevronRightIcon, DocumentPlusIcon, FolderIcon, FolderPlusIcon, PencilSquareIcon, TrashIcon, EllipsisHorizontalIcon } from "@heroicons/react/16/solid";
 import { DocumentIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import SelectButton from "./SelectButton";
 import '../styles/Folder.css';
 
@@ -79,6 +80,12 @@ const Folder = ({ padding, handleCreateNode, handleDeleteNode, handleUpdateNode,
         }
     };
 
+    const navigate = useNavigate();
+
+    const handleFetchingFiles = async (file_id) => {
+        navigate(`/${file_id}`);
+    }
+
     if (node.isFolder) {
         return (
             <>
@@ -150,7 +157,7 @@ const Folder = ({ padding, handleCreateNode, handleDeleteNode, handleUpdateNode,
         );
     } else {
         return (
-            <div className="node" style={{ paddingLeft: padding + 4 }}>
+            <div className="node" style={{ paddingLeft: padding + 4 }} onClick={() => handleFetchingFiles(node.file_id)}>
                 <span>
                     <DocumentIcon className="file-explorer-icon" />
                     {showUpdateField.visible ? (

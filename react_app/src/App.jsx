@@ -4,7 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Home from './components/Home';
 import Header from './components/Header';
 import FileExplorer from './components/FileExplorer';
-import Document from './components/Content';
+import Content from './components/Content';
 import './App.css';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
           <div id='content'>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/:file_id" element={<Document />} />
+              <Route path="/:file_id" element={<Content />} />
             </Routes>
           </div>
         </div>

@@ -174,4 +174,25 @@ const deleteFile = async (file_id, token) => {
     }
 }
 
-export { registerUser, getRootFolder, updateFolder, updateFile, createFolder, createFile, deleteFolder, deleteFile };
+const getFile = async (file_id, token) => {
+    try {
+        const response = await fetch(`${ENDPOINT}/files/${file_id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${API_KEY} ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error fetching file');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching file:', error.message);
+        throw error;
+    }
+}
+
+export { registerUser, getRootFolder, updateFolder, updateFile, createFolder, createFile, deleteFolder, deleteFile, getFile };

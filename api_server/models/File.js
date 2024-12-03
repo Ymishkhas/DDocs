@@ -65,7 +65,8 @@ const File = sequelize.define('File', {
         type: DataTypes.TEXT
     },
     content: {
-        type: DataTypes.TEXT
+        type: DataTypes.TEXT,
+        defaultValue: ''
     },
     is_public: {
         type: DataTypes.BOOLEAN,

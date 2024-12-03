@@ -26,7 +26,7 @@ CREATE TABLE "Files" (
     "folder_id" int,
     "name" varchar(255) NOT NULL,
     "description" text,
-    "content" text,
+    "content" text DEFAULT '',
     "is_public" boolean DEFAULT FALSE,
     "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
