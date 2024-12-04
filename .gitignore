@@ -45,4 +45,4 @@ ENV/
 # log files
 *.log
 
-*firebase.js
+# *firebase.js
