@@ -1,4 +1,4 @@
-import { CogIcon, ArrowRightStartOnRectangleIcon } from '@heroicons/react/16/solid';
+import { CogIcon, ArrowRightStartOnRectangleIcon, DocumentMagnifyingGlassIcon } from '@heroicons/react/16/solid';
 import { Link , } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate , useLocation } from 'react-router-dom';
@@ -49,7 +49,7 @@ const Header = () => {
     return (
         <header>
             <nav>
-                <Link to="/">Search DDocs</Link>
+                <Link to="/" className="logo-button"><span>Search</span> DDocs</Link>
                 {user ? (
                     <div>
                         <SelectButton

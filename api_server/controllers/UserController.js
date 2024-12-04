@@ -33,7 +33,7 @@ const UserController = {
 
             // Create default folder structure
             const rootFolder = await Folder.create({
-                name: 'My Documents',
+                name: 'Notes',
                 user_id: newUser.user_id,
                 parent_id: null
             });
@@ -47,6 +47,7 @@ const UserController = {
             await File.create({
                 name: 'Creating folders and files',
                 description: 'This is how to create folders and files in the app',
+                content: '<p>Try to create a new folder or file, click on the <code>...</code> button on the right corner of any folder.</p>',
                 is_public: false,
                 folder_id: subFolder.folder_id,
                 user_id: newUser.user_id

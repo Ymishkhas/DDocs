@@ -195,4 +195,25 @@ const getFile = async (file_id, token) => {
     }
 }
 
-export { registerUser, getRootFolder, updateFolder, updateFile, createFolder, createFile, deleteFolder, deleteFile, getFile };
+const searchFiles = async (query) => {
+    try {
+        const response = await fetch(`${ENDPOINT}/search/documents?q=${query}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${API_KEY}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error searching files');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error searching files:', error.message);
+        throw error;
+    }
+}
+
+export { registerUser, getRootFolder, updateFolder, updateFile, createFolder, createFile, deleteFolder, deleteFile, getFile, searchFiles };

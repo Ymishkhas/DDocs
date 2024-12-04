@@ -1,0 +1,43 @@
+.button-group {
+    button {
+        background: var(--gray-2);
+        border-radius: .5rem;
+        border: none;
+        color: var(--black);
+        font-family: inherit;
+        font-size: .875rem;
+        font-weight: 500;
+        line-height: 1.15;
+        margin: none;
+        padding: .375rem .625rem;
+        transition: all .2s cubic-bezier(.65, .05, .36, 1);
+    }
+
+    button:not([disabled]),
+    select:not([disabled]) {
+        cursor: pointer;
+    }
+
+    button:hover,
+    input:hover,
+    select:hover,
+    textarea:hover {
+        background-color: var(--gray-3);
+        color: var(--black-contrast);
+    }
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem;
+}
+
+.control-group {
+    align-items: flex-start;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+}

@@ -1,4 +1,5 @@
 import { EditorProvider, EditorContent, useEditor } from '@tiptap/react'
+import History from '@tiptap/extension-history'
 import StarterKit from '@tiptap/starter-kit'
 import { useState, useEffect } from 'react';
 import '../styles/Tiptap.css';
@@ -19,7 +20,6 @@ const Tiptap = ({ file_content, editable, updateFileContent }) => {
         onUpdate: ({ editor }) => {
             const html = editor.getHTML();
             updateFileContent(html);
-            console.log('Editor content updated:', html);
         },
     });
 

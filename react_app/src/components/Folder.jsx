@@ -83,7 +83,7 @@ const Folder = ({ padding, handleCreateNode, handleDeleteNode, handleUpdateNode,
     const navigate = useNavigate();
 
     const handleFetchingFiles = async (file_id) => {
-        navigate(`/${file_id}`);
+        navigate(`/document/${file_id}`);
     }
 
     if (node.isFolder) {

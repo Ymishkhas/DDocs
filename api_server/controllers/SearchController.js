@@ -1,4 +1,4 @@
-import { File, User } from "../models/index.js"
+import { File, Folder, User } from "../models/index.js"
 import { Op } from "sequelize";
 
 const SearchController = {
@@ -43,6 +43,17 @@ const SearchController = {
                     ...(q && { name: { [Op.iLike]: `%${q}%` } }),
                     is_public: true
                 },
+                include: [
+                    {
+                        model: Folder,
+                        include: [
+                            {
+                                model: User,
+                                attributes: ['fullname'] // Include the user's full name
+                            }
+                        ]
+                    }
+                ]
                 // attributes: { exclude: ["blob_url"] },
                 // attributes: ['project_id', 'name', 'description'],
             });

@@ -1,3 +1,4 @@
+import { DocumentIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useAuth } from '../contexts/AuthContext';
@@ -51,7 +52,7 @@ const Content = () => {
         try {
             const token = await user.getIdToken();
             await updateFile(fileId, { content: newContent }, token);
-            setFile({ ...file, content: newContent });
+            // setFile({ ...file, content: newContent });
         } catch (error) {
             console.error('Error updating file:', error.message);
         }
@@ -77,7 +78,7 @@ const Content = () => {
             {file && (
                 <div className="content-container">
                     <div className="file-controls">
-                        <p>{file.name}</p>
+                        <div>{<DocumentIcon className="icon"/>}{file.name}</div>
                         {editable && (
                             <div
                                 id='public-button'

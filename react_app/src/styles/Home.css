@@ -1,3 +1,157 @@
-.home {
-    
+.gretting {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    font-size: bold;
+}
+
+.gretting span {
+    text-decoration: underline;
+}
+
+/* .gretting h1 {
+    font-size: 0.6rem;
+}
+
+@media (min-width: 640px) {
+    .gretting h1 {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .gretting h1 {
+        font-size: 1.2rem;
+    }
+} */
+
+.search-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.search-wrapper input {
+    width: 50%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.search-wrapper button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.results {
+    padding: 0px 80px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.result-card {
+    border: 1px solid #e8e8e8;
+    border-radius: 2px;
+    width: 208px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* text-align: center; */
+}
+
+.result-card a {
+    text-decoration: none;
+    color: #333333;
+}
+
+.result-card:hover {
+    border: 1px solid #333333;
+}
+
+/* .result-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+} */
+
+/* .result-card p {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+} */
+
+.result-card .preview {
+    padding: 10px !important;
+    font-size: 0.4rem !important;
+    color: #666;
+    width: 100% !important;
+    height: 200px !important;
+    overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.result-card .preview .ProseMirror {
+    padding: 0px !important;
+    font-size: 0.4rem !important;
+    width: 100% !important;
+    height: 180px !important;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis; 
+}
+
+.result-card .preview .ProseMirror *{
+    font-size: 0.7rem !important;
+    margin: 10px 0px !important;
+}
+
+.result-card .preview .ProseMirror p{
+    white-space: normal; /* Allow text wrapping */
+    overflow: hidden; /* Hide the overflow text */
+    text-overflow: ellipsis; /* Display an ellipsis (...) */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limit to 3 lines */
+    -webkit-box-orient: vertical;
+}
+
+.result-card .preview .ProseMirror code {
+    font-size: 0.5rem !important;
+}
+
+.result-card .preview .ProseMirror pre {
+    padding: 2px 4px !important;
+}
+
+.result-card .card-info{
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    border: 1px solid #e8e8e8;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.result-card .card-info p{
+    margin: 0px;
+    font-size: small;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.result-card .card-info #user{
+    font-size: 10px;
 }

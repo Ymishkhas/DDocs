@@ -29,12 +29,13 @@ function Main() {
   return (
     <div id='main' ref={mainContainerRef}>
       <ProtectedRoute>
-          <FileExplorer />
+        <FileExplorer />
       </ProtectedRoute>
       <div id='content'>
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/:file_id" element={<Content />} />
+          <Route path="/document/:file_id" element={<Content />} />
         </Routes>
       </div>
     </div>
@@ -45,7 +46,6 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Header />
         <Main />
       </AuthProvider>
     </BrowserRouter>

@@ -3,6 +3,7 @@
     flex-grow: 1;
     position: relative;
     height: 100%;
+    box-sizing: border-box;
 }
 
 .tiptap-editor>div {
@@ -12,7 +13,13 @@
     right: 0;
     bottom: 0;
     overflow-y: auto;
+    /* scrollbar-width: none; */
 }
+ /* Firefox */
+ /* Safari and Chrome */
+/* .tiptap-editor>div::-webkit-scrollbar {
+    width: 0; 
+} */
 
 /* Override the border style for the Tiptap editor */
 .ProseMirror {

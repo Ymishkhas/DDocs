@@ -14,10 +14,10 @@ const logger = winston.createLogger({
                 winston.format.simple()
             )
         }),
-        new winston.transports.File({
-            level: 'error',
-            filename: 'error-' + new Date().toISOString() + '.log',
-        }),
+        // new winston.transports.File({
+        //     level: 'error',
+        //     filename: 'error-' + new Date().toISOString() + '.log',
+        // }),
     ]
 });
 

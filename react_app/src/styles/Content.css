@@ -10,7 +10,8 @@
 }
 
 .content-container {
-    height: 100%;
+    height: 75%;
+    box-sizing: border-box;
 }
 
 #public-button {

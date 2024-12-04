@@ -21,3 +21,12 @@
     border: 1px solid #c2c2c2;
     border-radius: 5px;
 }
+
+.my-documents {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    font-weight: bold;
+    color: #333333;
+    text-align: center;
+}

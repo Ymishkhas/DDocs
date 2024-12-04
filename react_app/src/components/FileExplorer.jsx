@@ -113,7 +113,8 @@ const FileExplorer = () => {
     return (
         <div id='file-explorer'>
             <div className="explorer-component">
-                <input id='search-input' type="text" placeholder='Search...' value={searchInput} onChange={handleSearchInput} />
+                {/* <input id='search-input' type="text" placeholder='Search...' value={searchInput} onChange={handleSearchInput} /> */}
+                <div className='my-documents'>My Documents</div>
             </div>
             {explorer && (
                 <div className="folder-container">

@@ -2,14 +2,42 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 23px 0px 18px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e8e8e8;
 }
 
 nav a {
     text-decoration: none;
-    color:#2c2c2c;
+    color: #2c2c2c;
+    text-align: center;
 }
 
+.logo-button {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logo-button span {
+    font-size: 1.5rem;
+    margin-right: 2px;
+    color: #777777;
+}
+
+.logo-button:hover {
+    color: #111;
+}
+
+.logo-button #logo {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 2px;
+    color: #777777;
+}
 #login-button {
     padding: 6px 8px;
     border-radius: 5px;
