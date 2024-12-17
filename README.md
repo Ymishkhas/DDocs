@@ -1,10 +1,10 @@
 # DDocs Web Application
 
-DDocs allows to create and edit folders and documents with a markdown text editor. Documents can be shared in the platfrom for others to see, allowing users to search wide range of documents created by the community. 
+DDocs allows users to create and edit folders and documents with a Markdown text editor. Documents can be shared in the platform for others to see, and users can search through a wide range of documents created by the community. 
 
 #### Features
-- User sign-in with google, along with authentication and authorizatoin using Firebase.
-- Fully functional file explorer for user folders and documents. User can add, edit, delete folders and files.
+- User sign-in with Google, along with authentication and authorization using Firebase.
+- Fully functional file explorer for user folders and documents. Users can add, edit, and  delete folders and files.
 - Markdown text editor for editing documents.
 - Search home page, where users can search for publicly shared documents.
 
@@ -38,17 +38,17 @@ This project uses the [starter template](https://github.com/UsableSystemsLab/rea
 | Express API Server | `http://localhost:4000/health`      |
 
 #### Note
-> I don't own the architecture [template](https://github.com/UsableSystemsLab/react-node-postgres-pgadmin-docker-template), it is open template and of the property of @kalharbi. If needed more info about **Database Initialization** and **Managing Secrets and Environment Variables** its available in the template repo.
+> I don't own the architecture [template](https://github.com/UsableSystemsLab/react-node-postgres-pgadmin-docker-template), it is an open template and of the property of [@kalharbi](https://github.com/kalharbi). If you need more info about it, it's available in the template repo.
 
 ## Usage
 
-### Docker desktop
-- Must have docker desktop installed and signed-in your account
+### Docker setup
+- Must have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and signed in your account
 
 ### Firebase setup
 
-- Muse have a Firebase project or create a [new firebase project](https://console.firebase.google.com/)
-- Register the web app under the project settings, copy the firebase config and place them in `/react_app/src/firebase.js` file.
+- Muse have a Firebase project or create a [new Firebase project](https://console.firebase.google.com/)
+- Register the web app under the project settings, copy the firebase config, and place them in the `/react_app/src/firebase.js` file.
 - Create a new service account under the project settings, generate the private key and save it.
 
 ### Environment variables setup
