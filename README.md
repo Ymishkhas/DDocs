@@ -1,8 +1,25 @@
-# Full Stack Dockerized Web Application Template (React, Node.js, PostgreSQL, and pgAdmin)
+# DDocs Web Application
 
-This project provides a starter template for a full stack web application using Docker Compose. It uses React, Node.js, PostgreSQL, and pgAdmin, offering a complete development environment.
+DDocs allows to create and edit folders and documents with a markdown text editor. Documents can be shared in the platfrom for others to see, allowing users to search wide range of documents created by the community. 
 
- #### Features
+#### Features
+- User sign-in with google, along with authentication and authorizatoin using Firebase.
+- Fully functional file explorer for user folders and documents. User can add, edit, delete folders and files.
+- Markdown text editor for editing documents.
+- Search home page, where users can search for publicly shared documents.
+
+## Screenshots
+
+![](/Screenshots/home%20page.png)
+![](/Screenshots/Editing%20page.png)
+
+
+
+## Architecture
+
+This project uses the [starter template](https://github.com/UsableSystemsLab/react-node-postgres-pgadmin-docker-template) for a full stack web application using Docker Compose. It uses React, Node.js, PostgreSQL, and pgAdmin, offering a complete development environment.
+
+ #### Architecture breakdown
 
 - React frontend
 - Node.js backend API server
@@ -11,7 +28,7 @@ This project provides a starter template for a full stack web application using 
 - Database initialization scripts
 - Docker Compose
 
-## Services
+#### Services
 
 | Service            | URL                                 |
 |--------------------|-------------------------------------|
@@ -20,13 +37,45 @@ This project provides a starter template for a full stack web application using 
 | React App          | `http://localhost:3000`             |
 | Express API Server | `http://localhost:4000/health`      |
 
+#### Note
+> I don't own the architecture [template](https://github.com/UsableSystemsLab/react-node-postgres-pgadmin-docker-template), it is open template and of the property of @kalharbi. If needed more info about **Database Initialization** and **Managing Secrets and Environment Variables** its available in the template repo.
+
 ## Usage
+
+### Docker desktop
+- Must have docker desktop installed and signed-in your account
+
+### Firebase setup
+
+- Muse have a Firebase project or create a [new firebase project](https://console.firebase.google.com/)
+- Register the web app under the project settings, copy the firebase config and place them in `/react_app/src/firebase.js` file.
+- Create a new service account under the project settings, generate the private key and save it.
+
+### Environment variables setup
 
 - Copy the example environment file to create your .env file:
 
 ```shell
 cp example.env .env
 ```
+- Put your service account private key details in the .env
+```shell
+FIREBASE_TYPE=
+FIREBASE_PROJECT_ID=
+FIREBASE_PRIVATE_KEY_ID=
+FIREBASE_PRIVATE_KEY=
+FIREBASE_CLIENT_EMAIL=
+FIREBASE_CLIENT_ID=
+FIREBASE_AUTH_URI=
+FIREBASE_TOKEN_URI=
+FIREBASE_AUTH_PROVIDER_CERT_URL=
+FIREBASE_CERT_URL=
+FIREBASE_UNIVERSE_DOMAIN=
+````
+
+- Optional - Change the environment variables if wanted
+
+### Run the application
 
 - Start the containers:
 
@@ -34,63 +83,7 @@ cp example.env .env
 docker compose up
 ```
 
-## Database Initialization
-
-To create and populate database tables:
-1. Edit the SQL scripts in the db-init-scripts/ directory:
-  - `01_init_db.sql`: Create tables
-  - `02_insert_db.sql`: Insert initial data
-
-2. Rebuild the containers with the new scripts:
-
-> **Caution:** This will stop all running containers, and remove all named volumes declared in the "volumes" section as well as all anonymous volumes attached to containers.
-
-```shell
-docker compose down -v
-docker compose build db
-docker compose up
-```
-
-3. Verify that all four containers are running:
-```shell
-docker ps
-```
-If any container is not running, check the logs:
-```shell
-docker ps -a
-docker logs <id_of_the_stopped_container>
-```
-
-## Managing Secrets and Environment Variables
-
-- For production environments, use Docker secrets:
-  - Edit the `docker-compose.yml` file
-  - Add a secrets attribute under each service that requires secure data.
-  ```yaml
-  version: '3.7'
-  services:
-    react_app:
-      secrets:
-        - app_secret
-
-  secrets:
-    app_secret:
-      file: ./app_secret.txt
-  ```
-
-- For development environments, use environment variables:
-  - Add variables to the .env file, e.g.:
-  ```shell
-  API_SERVER_KEY=0123456789abcdefghijklmnopqrstuvwxyz
-  ```
-  -  Update the docker-compose.yml file to use the environment variables:
-  ```yaml
-  api:
-    environment:
-      - API_SERVER_PORT=${API_SERVER_PORT}
-      - POSTGRES_HOST=postgres16
-      - API_SERVER_KEY=${API_SERVER_KEY}
-  ```
+- Visit the website at http://localhost:3000
 
 ## License
 This project is licensed under the MIT License.
